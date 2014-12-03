@@ -251,7 +251,7 @@ module.exports = function(grunt) {
 				},
 				options: {
 					transform: ['coffeeify'],
-					external: ['jquery','underscore'],
+					//external: ['jquery','underscore','hoge'],
 					browserifyOptions: {
 						extensions: ['.coffee']
 					}
@@ -263,10 +263,10 @@ module.exports = function(grunt) {
 				},
 				options: {
 					transform: ['coffeeify', "debowerify"],
+					//require: ['jquery','underscore','path/to/hoge.coffee:hoge'],
 					browserifyOptions: {
 						extensions: ['.coffee']
-					},
-					require: ['jquery','underscore']
+					}
 				}
 			}
 		},

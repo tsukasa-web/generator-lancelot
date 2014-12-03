@@ -1,9 +1,7 @@
-# generator-giraffe
-
-![](http://ones-locus-plus.sakura.ne.jp/giraffe2.jpg)
+# generator-lancelot
 
 A generator for [Yeoman](http://yeoman.io).  
-高速化を念頭に置いて作成した静的サイト構築用ジェネレータです。
+高速化を念頭に置いて作成したIC用ジェネレータです。
 
 ## About giraffe
 
@@ -11,9 +9,8 @@ A generator for [Yeoman](http://yeoman.io).
 
 * ディレクトリの初期構築
 * CoffeeScriptのコンパイル
-* TypeScriptのコンパイル
 * Sassのコンパイル
-* css/jsファイルの結合＆圧縮
+* cssファイルの結合＆圧縮
 * jsHintによるチェック
 * cssLintによるチェック
 * cssの重複プロパティチェック
@@ -27,6 +24,8 @@ A generator for [Yeoman](http://yeoman.io).
 * grunt-kssによるスタイルガイド生成
 * 各種mixinなどのscssライブラリを追加
 * Jadeに対応
+* browserifyによるjsのモジュール管理と結合
+* Jasmineによるテスト
 
 ### Install
 
@@ -50,7 +49,7 @@ $ gem install csscss
 
 generator-giraffeをインストールします。
 
-	npm install -g generator-giraffe
+	npm install -g generator-lancelot
 
 
 任意のディレクトリを作成して移動し、```yo giraffe & grunt start```を実行します。  
@@ -58,7 +57,7 @@ generator-giraffeをインストールします。
 
 	mkdir hogehoge
 	cd hogehoge
-	yo giraffe && grunt start
+	yo lancelot && grunt start
 	
 yeomanからの質問形式で以下の設定を行います。
 
@@ -66,11 +65,8 @@ yeomanからの質問形式で以下の設定を行います。
 - localhost（プロジェクト名）
 - ルートディレクトリ名
 - OS選択（YesでMac,NoでWin）
-- TypeScriptを使用するかどうか
-- CoffeeScriptを使用するかどうか
 - Jadeを使用するかどうか
 - FontAwesomeを使用するかどうか
-- jQueryのバージョン（無記入で最新版）
 - 共通リソースディレクトリ名
 - コンパイル言語ファイルの格納先
 - 開発ツールディレクトリ名
@@ -92,14 +88,6 @@ Gruntfile.jsを開き、結合したいcss,jsのパスを通します。
     			'<%= path.root %>/<%= path.src %>/css/hogehoge.css'
     		],
     		dest: '<%= path.root %>/<%= path.src %>/css/dest/style-all.css'
-    	},
-    	run: {
-    		src: [
-    			'<%= path.root %>/<%= path.src %>/js/modernizr.js',
-    			'<%= path.root %>/<%= path.src %>/js/jquery.min.js',
-    			'<%= path.root %>/<%= path.src %>/js/hogehoge.js'
-    		],
-    		dest: '<%= path.root %>/<%= path.src %>/js/dest/run-all.js
     	}
     },
 
