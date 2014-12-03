@@ -1,0 +1,87 @@
+@charset "UTF-8";
+//-------------------------------------//
+//  Settings
+//-------------------------------------//
+@import 'bourbon';
+
+//  Browser
+//-------------------------------------
+$supportIe7: false;
+$supportIe8: true;
+$supportIe9: true;
+
+//  Variables
+//-------------------------------------
+
+// FixedWidth
+$site-width: 960px;
+$main-column-width: 620px;
+
+// BreakPoint
+$bp-pc: 1024px;
+$bp-tab: 768px;
+$bp-sp: 480px;
+
+// Colors
+$color-a: #f8b500;
+$color-b: #fbd366;
+$color-c: #000000;
+$color-d: #222222;
+$color-e: #3b3b3b;
+$color-f: #727172;
+$color-g: #dddddd;
+$color-h: #ffffff;
+
+// Spaces
+$space-base: 6px;
+$space-2: $space-base * 2;
+$space-3: $space-base * 4;
+$space-4: $space-base * 6;
+
+// Font Size
+$font-size-base: 12px;
+$font-size-1: $font-size-base - 4px;
+$font-size-2: $font-size-base - 2px;
+$font-size-3: $font-size-base + 2px;
+$font-size-4: $font-size-base + 4px;
+$font-size-5: $font-size-base + 6px;
+// Font Size Base(rem)
+//$font-size-base: 62.5%;
+
+// Border Radius
+$radius-base: 3px;
+$radius-2: $radius-base * 2;
+$radius-3: $radius-base * 4;
+
+//LineHeight
+$designed-line-height: 26px;
+$base-line-height: $designed-line-height / $font-size-base;
+$base-line-height: round($base-line-height * 10) / 10; // 小数点第二位で四捨五入
+
+// Font Settings
+$font-family-body: "メイリオ","Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// SemanticGridSystemSetting(使わない時は丸ごと消してOK)
+//-------------------------------------
+
+// Defaults which you can freely override
+$column-width: 60px;
+$gutter-width: 20px;
+$columns: 12;
+// Utility function — you should never need to modify this
+@function gridsystem-width($columns:$columns) {
+	@return ($column-width * $columns) + ($gutter-width * $columns);
+}
+// fluid layout時は100%に設定する
+$total-width: gridsystem-width($columns);
+// Correcting percentage-to-pixel rounding errors in IE6 & 7
+// See http://tylertate.com/blog/2012/01/05/subpixel-rounding.html
+// Override @min with the minimum width of your layout
+$min-width: $site-width;
+$correction:(((0.5 / $min-width) * 100) * 1%);
+
+//  Mixins & Extends
+//-------------------------------------
+@import "../lib/library";
+//font-awesome使用時にコメントを外す
+//@import "../font-awesome/font-awesome";

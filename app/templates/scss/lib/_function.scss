@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+//========================================================================================
+// 汎用 function
+// ========================================================================================
+
+//========================================================================================
+//nounit
+//数値から単位を取り除く関数
+//------------------------------------
+//- unitless()が既にSassで別の用途で使用されているので、
+//   関数名は nounit() とした
+//- 次のIssueの対応策としても少し有効かも
+//   https://github.com/nex3/sass/issues/83
+//   https://github.com/nex3/sass/issues/83#issuecomment-1150383
+//   - (5px / 1px)で数値のみを取得できるとあるが非常にわかりづらい
+//     なので、この関数を使う方が良い
+//     [Poor]   5px / 1px   // -> 5
+//     [Better] nounit(5px) // -> 5
+//- 1 + "px" は 文字列"1px"になるので、
+//   単位を後でつける手法は一切使えない
+//- 新しいユニットが増えたら随時追加が必要
+//
+//Units:
+//- http://www.w3.org/TR/css3-values/#percentages
+//- http://www.w3.org/TR/css3-values/#lengths
+//- http://www.w3.org/TR/css3-values/#other-units
+//
+//forked from kosei27's "Sass(Scss): 数値から単位を取り除く@function" http://jsdo.it/kosei27/cPPP
+//========================================================================================
+
+@function nounit($value) {
+	@if (type-of($value) == number) {
+		$_divisor: ($value * 0) + 1;
+		@return $value / $_divisor;
+	} @else {
+		@warn "#{$value} is not a number.";
+		@return $value;
+	}
+}
+
+//========================================================================================
+//フォントサイズの相対値算出
+//-------------------------------------------------------------------------------------------------------
+//	$size     : 実際に指定したいフォントサイズ
+//	$context  : 要素が継承しているフォントサイズ
+//	$unit     : フォントサイズの単位（指定なしで % を使用）
+//
+//	使用例：
+//	p.foo {
+//		font-size : fz(12px, 16px);  <= フォントサイズ 16px が継承されている状態で 12px に変更し、単位を％指定とする
+//	}
+//========================================================================================
+
+@function fz ($size, $context:$font-size-base, $unit:'%') {
+	$size : nounit($size);
+	$context : nounit($context);
+	@if $unit == '%' {
+		@return percentage($size/$context);
+	} @else if $unit == 'px' {
+		@return #{($size/$context)*10}#{$unit};
+	}@else {
+		@return #{$size/$context}#{$unit};
+	}
+}
+
+//========================================================================================
+//角度単位の変換
+//-------------------------------------------------------------------------------------------------------
+//	$value     : 変換したい角度（単位付）
+//	$unit  : 変換したい単位
+//
+//	使用例：
+//	$angle-deg: 30deg;
+//	$angle-rad: convert-angle($angle-deg, rad); // 0.5236rad
+//========================================================================================
+
+@function convert-angle($value, $unit) {
+	$convertable-units: deg grad turn rad;
+	$conversion-factors: 1 10grad/9deg 1turn/360deg 3.1415926rad/180deg;
+	@if index($convertable-units, unit($value)) and index($convertable-units, $unit) {
+		@return $value
+             / nth($conversion-factors, index($convertable-units, unit($value)))
+             * nth($conversion-factors, index($convertable-units, $unit));
+	} @else {
+		@warn "Cannot convert #{unit($value)} to #{$unit}";
+	}
+}
+
+//========================================================================================
+//RGB 値の同数調整（adjust-color() のラップ関数）
+//-------------------------------------------------------------------------------------------------------
+//	RGB の値を同数調整し、指定の色を明るく／暗くする関数
+//
+//	$color    : 変更したい元の色
+//	$weight   : 係数（デフォルトで 0.5）　正の値で白に、負の値で黒に近づく
+//
+//	使用例：
+//	p.foo {
+//		background-color : adjust-rgb(#f00, 0.2);  <= #f00 の rgb 値を 51（255*0.2）増加
+//	}
+//========================================================================================
+
+@function adjust-rgb($color, $weight:0.5) {
+	$num : 255 * $weight;
+	@return adjust-color($color, $red:$num, $green:$num, $blue:$num);
+}
+
+//========================================================================================
+//Black & White
+//-------------------------------------------------------------------------------------------------------
+//	白と黒を簡単に短い記述で透明度つきで指定-mixinでも使用
+//
+//	$opacity    : 透明度
+//
+//	使用例：
+//	.my-class{
+//		background:black(0.15);
+//		color:white(0.9);
+//	}
+//========================================================================================
+
+@function black($opacity){
+	@return rgba(0,0,0,$opacity)
+}
+@function white($opacity){
+	@return rgba(255,255,255,$opacity)
+}

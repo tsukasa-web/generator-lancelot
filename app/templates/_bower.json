@@ -1,0 +1,8 @@
+{
+	"name": "<%= user_name %>",
+	"dependencies": {
+		<% if (fontawesome) { %> "font-awesome": "latest",<% } %>
+		"modernizr": "latest",
+		"normalize-css": "latest"
+	}
+}

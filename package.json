@@ -1,0 +1,39 @@
+{
+	"name": "generator-lancelot",
+	"version": "0.0.1",
+	"description": "A generator for IC",
+	"licenses": "MIT",
+	"homepage": "https://github.com/tsukasa-web/generator-lancelot",
+	"bugs": "https://github.com/tsukasa-web/generator-lancelot/issues",
+	"main": "app/index.js",
+	"repository": "git://github.com/tsukasa-web/generator-lancelot",
+	"author": {
+		"name": "tsukasa-web",
+		"email": "oneslocus@gmail.com",
+		"url": "https://github.com/tsukasa-web"
+	},
+	"engines": {
+		"node": ">=0.10.0",
+		"npm": ">=1.2.10"
+	},
+	"scripts": {
+		"test": "mocha"
+	},
+	"files": [
+		"app"
+	],
+	"keywords": [
+		"yeoman-generator"
+	],
+	"dependencies": {
+		"yeoman-generator": "~0.17.3",
+		"chalk": "~0.5.1",
+		"yosay": "^1.0.0"
+	},
+	"devDependencies": {
+		"mocha": "*"
+	},
+	"peerDependencies": {
+		"yo": ">=1.0.0"
+	}
+}
