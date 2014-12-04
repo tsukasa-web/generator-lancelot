@@ -19,48 +19,6 @@ module.exports = function(grunt) {
 		 ---------------------------------------------------*/
 		path: pathConfig,
 
-		/* typescriptのコンパイル
-		 ------------------------------------------------------------------------*/
-		typescript: {
-			base: {
-				src: ['<%%= path.root %>/<%%= path.compile %>/ts/*.ts'],
-				dest: '<%%= path.root %>/<%%= path.src %>/js/dest',
-				options: {
-					basePath: '<%%= path.root %>/<%%= path.compile %>/ts'
-				}
-			}
-		},
-		//-----------------------------------------------------------------------
-
-		/* coffeescriptのコンパイル
-		 ------------------------------------------------------------------------*/
-		coffee: {
-			compileAll: {
-				//top-levelのfunctionを付けたい方はoptionを消してください。
-				options: {
-					bare: true
-				},
-				expand: true,
-				flatten: true,
-				cwd: '<%%= path.root %>/<%%= path.compile %>/coffee',
-				src: ['*.coffee'],
-				dest: '<%%= path.root %>/<%%= path.src %>/js/dest',
-				ext: '.js'
-			},
-			compile: {
-				//top-levelのfunctionを付けたい方はoptionを消してください。
-				options: {
-					bare: true
-				},
-				expand: true,
-				flatten: true,
-				src: ['*.coffee'],
-				dest: '<%%= path.root %>/<%%= path.src %>/js/dest',
-				ext: '.js'
-			}
-		},
-		//-----------------------------------------------------------------------
-
 		/* Scssのコンパイル
 		 ------------------------------------------------------------------------*/
 		sass: {
