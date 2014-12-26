@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 	// パスの設定
 	var pathConfig = {
 		vh: '<%= localhost %>',		// バーチャルホストのサーバー名
-		root: '../<%= rootDirectory %>',				// project root
+		root: '<%= rootDirectory %>',				// project root
 		src: '<%= common %>',				// 共通リソースの配置先
 		compile: '<%= common %>/<%= compile %>',	// コンパイル言語ソース類の配置先
 		dev: '../<%= _dev %>',
@@ -272,12 +272,7 @@ module.exports = function(grunt) {
 					{ expand: true, cwd: 'bower_components/modernizr', src: ['modernizr.js'], dest: '<%= rootDirectory %>/<%%= path.src %>/lib' },
 					{ expand: true, cwd: 'bower_components/normalize-css', src: ['normalize.css'], dest: '<%= rootDirectory %>/<%%= path.src %>/lib' },
 					{ expand: true, cwd: 'bower_components/font-awesome/fonts', src: ['**'], dest: '<%= rootDirectory %>/<%%= path.src %>/fonts' },
-					{ expand: true, cwd: 'bower_components/font-awesome/scss', src: ['**'], dest: '<%= rootDirectory %>/<%%= path.compile %>/scss/font-awesome' },
-					{ expand: true, src: 'package.json', dest: '<%= _dev %>' },
-					{ expand: true, src: 'Gruntfile.js', dest: '<%= _dev %>' },
-					{ expand: true, src: '.bowerrc', dest: '<%= _dev %>' },
-					{ expand: true, src: 'bower.json', dest: '<%= _dev %>' },
-					{ expand: true, cwd: 'node_modules', src: ['**'], dest: '<%= _dev %>/node_modules' }
+					{ expand: true, cwd: 'bower_components/font-awesome/scss', src: ['**'], dest: '<%= rootDirectory %>/<%%= path.compile %>/scss/font-awesome' }
 				]
 			}
 		},
@@ -303,11 +298,8 @@ module.exports = function(grunt) {
 				},
 				src: [
 					'assets',
-					'<%= _dev %>/node_modules/generator-giraffe',
-					'node_modules',
+					'node_modules/generator-giraffe',
 					'bower_components',
-					'package.json',
-					'Gruntfile.js',
 					'.bowerrc',
 					'.editorconfig',
 					'.jshintrc',
@@ -338,7 +330,9 @@ module.exports = function(grunt) {
 	});
 
 	// gruntコマンドを打つと走るタスクです。
-	grunt.registerTask('default', ['sass','csscss','autoprefixer:no_dest','csslint','jshint','concat','uglify','cssmin']);
+	grunt.registerTask('default', ['sass','jade','csscss','browserify:lib','browserify:dist','autoprefixer','concat','uglify','cssmin']);
+	// grunt cssコマンドを打つと走るタスクです。browserifyによってlib.jsを出力します。
+	grunt.registerTask('makelib',['browserify:lib']);
 	// grunt cssコマンドを打つと走るタスクです。csscssによってスタイルの重複を出力します。
 	grunt.registerTask('csscss', ['csscss']);
 	// grunt spriteコマンドを打つと走るタスクです。csscssによってスタイルの重複を出力します。

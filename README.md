@@ -37,11 +37,10 @@ Windows環境では[Rubyのインストール](https://www.ruby-lang.org/ja/down
 - [Yeoman](http://yeoman.io/)
 - [Grunt](http://gruntjs.com/)
 - [Bower](http://bower.io/)
-- [livereloadx](http://nitoyon.github.io/livereloadx/)
 - [csscss](http://zmoazeni.github.io/csscss/)
 
 ```
-$ npm install -g yo grunt-cli bower livereloadx
+$ npm install -g yo grunt-cli bower
 $ gem install csscss
 ```
 
