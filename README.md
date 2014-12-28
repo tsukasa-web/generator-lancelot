@@ -46,7 +46,7 @@ $ gem install csscss
 
 ### How to use
 
-generator-giraffeをインストールします。
+generator-lancelotをインストールします。
 
 	npm install -g generator-lancelot
 
@@ -63,12 +63,10 @@ yeomanからの質問形式で以下の設定を行います。
 - 開発者名（packageのauthorに入ります）
 - localhost（プロジェクト名）
 - ルートディレクトリ名
-- OS選択（YesでMac,NoでWin）
 - Jadeを使用するかどうか
 - FontAwesomeを使用するかどうか
 - 共通リソースディレクトリ名
 - コンパイル言語ファイルの格納先
-- 開発ツールディレクトリ名
 - ドキュメントディレクトリ名
 
 質問に返答後、返答内容に応じたディレクトリが構成され、  
@@ -93,14 +91,13 @@ Gruntfile.jsを開き、結合したいcss,jsのパスを通します。
 
 #### ファイル監視の起動
 
-cmd_batまたはcmd_commandフォルダの中にあるgrunt_watch.batまたはgrunt_watch.commandを叩いてください。  
-Grunt.jsで設定したlocalhost名でページが開き、ファイルの監視が始まります。
+```grunt watch_files```コマンドでGrunt.jsで設定したlocalhost名でページが開き、ファイルの監視が始まります。
 Sublime Text2でlivereloadのプラグインを入れてる人は、バッティングするのでプラグインをremoveしてから使ってください。  
 この後、コンソールは出したままにしておいてください。最小化しても大丈夫です。  
 以降はscss/coffee/js(Sassのみの時)が更新される度に自動的にコンパイル・結合・圧縮・デバッグが行われます。  
 さらに、htmlとcss(sassを使っている人はscss更新時)の更新時に自動でブラウザがリロードされます。  
 コンソールは消さずに出したままにしておいてください。監視をやめたい場合はコンソール上でCtrl+Cを押してください。　　
-任意のタイミングでコンパイル・結合・圧縮・デバッグを行いたい場合はgrunt_command.batまたはgrunt_command.commandを叩くか、コンソール上で「grunt」と打ち込んでください。
+任意のタイミングでコンパイル・結合・圧縮・デバッグを行いたい場合は```grunt```コマンドを打ち込んでください。
 
 #### livereloadのアドオン・エクステンションを取得
 
@@ -118,13 +115,13 @@ https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkigh
 
 #### styleguideの作成
 
-cmd_batまたはcmd_commandフォルダの中にあるgrunt_style-guideを叩くとstyleguideの作成が始まります。初期設定ではtemplate格納先はstyleguide_tempフォルダに、出力先はmodulesフォルダ内に設定されています。
+```grunt styleguide```コマンドで作成が始まります。初期設定ではtemplate格納先はstyleguide_tempフォルダに、出力先はmodulesフォルダ内に設定されています。
 
 - [grunt-kss](https://github.com/t32k/grunt-kss)
 
 #### 重複プロパティのチェックとcss・jsのlint/hintチェック
 
-cmd_batまたはcmd_commandフォルダの中にあるgrunt_checkを叩くと重複プロパティのチェックとcss/jsのlint/hintが始まります。初期設定では/common/css/destと/common/js/dest内にチェックの指定先が設定されています。lintの設定等はGruntfile.jsを書き換えて設定可能です。
+```grunt check```を叩くと重複プロパティのチェックとcss/jsのlint/hintが始まります。初期設定では/common/css/destと/common/js/dest内にチェックの指定先が設定されています。lintの設定等はGruntfile.jsを書き換えて設定可能です。
 
 - [grunt-contrib-csslint](https://github.com/gruntjs/grunt-contrib-csslint)
 - [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
@@ -150,7 +147,7 @@ cmd_batまたはcmd_commandフォルダの中にあるgrunt_checkを叩くと重
 
 #### スプライトシートの作成
 
-Compassで毎回書き出すと遅くなるので、Compassのスプライトシート生成はgrunt-spritesmithで代用しています。cmd_batまたはcmd_commandフォルダの中にあるgrunt_spriteを叩くとスプライトシートの生成が始まります。初期設定では/common/img/sprite内のpng画像が結合され、/common/img/にsprite.pngとして書き出されます。また、スタイルの設定ファイルは/common/compile/scss/lib/_sprite.scssに上書きされます。
+Compassで毎回書き出すと遅くなるので、Compassのスプライトシート生成はgrunt-spritesmithで代用しています。```grunt sprite```を叩くとスプライトシートの生成が始まります。初期設定では/common/img/sprite内のpng画像が結合され、/common/img/にsprite.pngとして書き出されます。また、スタイルの設定ファイルは/common/compile/scss/lib/_sprite.scssに上書きされます。
 
 ## License
 

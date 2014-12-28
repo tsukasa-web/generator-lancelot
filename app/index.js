@@ -41,12 +41,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 			},
 			{
 				type: 'confirm',
-				name: 'OS',
-				message: 'Which OS do you use ?(Mac or Win) Yes-->Mac No-->Win default(Yes)',
-				default: 'Y/n'
-			},
-			{
-				type: 'confirm',
 				name: 'fontawesome',
 				message: 'Do you use font-awesome? default(Yes)',
 				default: 'Y/n'
@@ -62,11 +56,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 				default: 'compile'
 			},
 			{
-				name: '_dev',
-				message: 'What is development tool resource directory name? default(_dev)',
-				default: '_dev'
-			},
-			{
 				name: '_documents',
 				message: 'What is documents directory name? default(_documents)',
 				default: '_documents'
@@ -77,13 +66,11 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 			this.user_name = props.user_name;
 			this.localhost = props.localhost;
 			this.rootDirectory = props.rootDirectory;
-			this.OS = props.OS;
 			this.fontawesome = props.fontawesome;
 			this.sprite = props.sprite;
 			this.jqueryversion = props.jqueryversion;
 			this.common = props.common;
 			this.compile = props.compile;
-			this._dev = props._dev;
 			this._documents = props._documents;
 			done();
 		}.bind(this));
@@ -91,7 +78,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 
 	app : function () {
 		this.mkdir(this.rootDirectory);
-		this.mkdir(this._dev);
 		this.mkdir(this.rootDirectory + '/' + this.common);
 		this.mkdir(this.rootDirectory + '/' + this.common + '/css');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/js');
@@ -125,11 +111,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 		this.copy('scss/_module.scss', this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss' + '/_module.scss');
 		this.copy('scss/style.scss', this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss' + '/style.scss');
 
-		if(this.OS){
-			this.directory('cmd/cmd_command', this._dev + '/cmd_command');
-		}else{
-			this.directory('cmd/cmd_bat', this._dev + '/cmd_bat');
-		}
 		this.template('_Gruntfile.js','Gruntfile.js');
 		this.template('_package.json','package.json');
 		this.template('_bower.json','bower.json');
