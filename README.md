@@ -17,7 +17,6 @@ A generator for [Yeoman](http://yeoman.io).
 * cssの不要プレフィックス削除
 * este-watchによるファイル更新の監視→コンパイル・結合・圧縮・デバッグの自動化
 * 自動ブラウザリロード
-* jQueryの取得（バージョン指定可）
 * mixinライブラリ（bourbon）を搭載
 * 最新normalize/modernizr/font-awesomeの取得
 * spritesmithによるsprite作成
