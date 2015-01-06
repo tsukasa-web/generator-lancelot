@@ -68,10 +68,20 @@ module.exports = function(grunt) {
 				files:[{
 					expand: true,
 					cwd: '<%%= path.root %>/<%%= path.compile %>/jade/',
-					src:['**/*.jade','!_parts/*.jade'],
+					src:['**/*.jade','!_parts/*.jade','!_templates/*.jade'],
 					dest: '<%%= path.root %>',
 					ext: '.html'
 				}]
+			},
+			template:{
+				options: {
+					client: true,
+					compileDebug: false,
+					amd: false
+				},
+				files: {
+					"<%%= path.root %>/<%%= path.compile %>/coffee/vender/templates.js": "<%%= path.root %>/<%%= path.compile %>/jade/_templates/**/*.jade"
+				}
 			}
 		},
 		//-----------------------------------------------------------------------
@@ -208,7 +218,7 @@ module.exports = function(grunt) {
 				},
 				options: {
 					transform: ['coffeeify'],
-					//external: ['jquery','underscore','hoge'],
+					external: ['jquery','underscore'/*,'hoge'*/],
 					browserifyOptions: {
 						extensions: ['.coffee']
 					}
@@ -219,8 +229,8 @@ module.exports = function(grunt) {
 					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/lib.coffee']
 				},
 				options: {
-					transform: ['coffeeify', "debowerify"],
-					//require: ['jquery','underscore','path/to/hoge.coffee:hoge'],
+					transform: ['coffeeify', 'debowerify'],
+					require: ['jquery','underscore'/*,'path/to/hoge.coffee:hoge'*/],
 					browserifyOptions: {
 						extensions: ['.coffee']
 					}
