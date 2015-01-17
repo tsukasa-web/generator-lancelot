@@ -93,6 +93,8 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss' + '/lib');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/coffee');
+		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/coffee' + '/assets');
+		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/coffee' + '/vender');
 		this.directory('coffee', this.rootDirectory + '/' + this.common + '/' + this.compile + '/coffee');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/jade');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/' + this.compile + '/jade' + '/_parts');

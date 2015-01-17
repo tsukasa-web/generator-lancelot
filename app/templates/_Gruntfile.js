@@ -89,6 +89,13 @@ module.exports = function(grunt) {
 		/* js,cssファイルの結合
 		 ------------------------------------------------------------------------*/
 		concat: {
+			script: {
+				src: [
+					'<%%= path.root %>/<%%= path.src %>/js/run.js',
+					'<%%= path.root %>/<%%= path.src %>/js/lib.js'
+				],
+				dest: '<%%= path.root %>/<%%= path.src %>/js/all.js'
+			},
 			style: {
 				src: [
 					'<%%= path.root %>/<%%= path.src %>/lib/normalize.css',
@@ -127,7 +134,7 @@ module.exports = function(grunt) {
 		autoprefixer: {
 			options: {
 				// ブラウザのバージョン指定
-				browsers: ['last 2 version', 'ie 9']
+				browsers: ['last 2 version']
 			},
 			no_dest: {
 				src: '<%%= path.root %>/<%%= path.src %>/css/dest/*.css'
@@ -198,7 +205,7 @@ module.exports = function(grunt) {
 				}
 			},
 			coffee: function(filepath) {
-				return ['browserify','uglify'];
+				return ['browserify','concat:script','uglify'];
 			},
 			scss: function(filepath) {
 				return ['sass','autoprefixer:no_dest','concat:style','cssmin'];
@@ -214,7 +221,7 @@ module.exports = function(grunt) {
 		browserify: {
 			dist: {
 				files: {
-					'<%%= path.root %>/<%%= path.src %>/js/dest/all.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/all.coffee']
+					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/run.coffee']
 				},
 				options: {
 					transform: ['coffeeify'],
