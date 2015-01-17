@@ -91,8 +91,8 @@ module.exports = function(grunt) {
 		concat: {
 			script: {
 				src: [
-					'<%%= path.root %>/<%%= path.src %>/js/run.js',
-					'<%%= path.root %>/<%%= path.src %>/js/lib.js'
+					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js',
+					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js'
 				],
 				dest: '<%%= path.root %>/<%%= path.src %>/js/all.js'
 			},
@@ -113,7 +113,7 @@ module.exports = function(grunt) {
 				preserveComments: "some"
 			},
 			run: {
-				src: ['<%%= path.root %>/<%%= path.src %>/js/dest/all.js'],
+				src: ['<%%= path.root %>/<%%= path.src %>/js/all.js'],
 				dest: '<%%= path.root %>/<%%= path.src %>/js/all.min.js'
 			}
 		},
