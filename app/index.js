@@ -30,11 +30,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 				default: 'user_name'
 			},
 			{
-				name: 'localhost',
-				message: 'Input project/localhost name default(localhost)',
-				default: 'localhost'
-			},
-			{
 				name: 'rootDirectory',
 				message: 'Input rootDirectory name default(docs)',
 				default: 'docs'
@@ -64,7 +59,6 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 
 		this.prompt(prompts, function (props) {
 			this.user_name = props.user_name;
-			this.localhost = props.localhost;
 			this.rootDirectory = props.rootDirectory;
 			this.fontawesome = props.fontawesome;
 			this.sprite = props.sprite;

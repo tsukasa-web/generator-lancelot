@@ -1,15 +1,17 @@
 module.exports = function(grunt) {
 
-	// ここに追加
+	var path = require('path');
 	var pkg = grunt.file.readJSON('package.json');
 
 	// パスの設定
 	var pathConfig = {
-		vh: '<%= localhost %>',		// バーチャルホストのサーバー名
 		root: '<%= rootDirectory %>',				// project root
 		src: '<%= common %>',				// 共通リソースの配置先
 		compile: '<%= common %>/<%= compile %>',	// コンパイル言語ソース類の配置先
 		documents: '<%= _documents %>'
+	};
+	var folderMount = function(connect, dir) {
+		return connect.static(path.resolve(dir));
 	};
 
 	grunt.initConfig({
@@ -263,19 +265,22 @@ module.exports = function(grunt) {
 		},
 		//-----------------------------------------------------------------------
 
-		/* livereload
+		/* ローカルサーバー
 		 ------------------------------------------------------------------------*/
-		livereloadx: {
-			dir: '<%%= path.root %>'
-		},
-		//-----------------------------------------------------------------------
-
-		/* ページオープン
-		 ------------------------------------------------------------------------*/
-		// ページオープン用URL
-		open: {
-			dev: {
-				path: 'http://<%%= path.vh %>/'
+		connect: {
+			server: {
+				options: {
+					base: '.',
+					livereload: true,
+					open: 'http://localhost:8000/',
+					hostname: '0.0.0.0',
+					port: 8000,
+					middleware: function(connect, options) {
+						return [
+							folderMount(connect, 'docs') //ここでルートにしたいフォルダを指定
+						];
+					}
+				}
 			}
 		},
 		//-----------------------------------------------------------------------
@@ -356,7 +361,7 @@ module.exports = function(grunt) {
 	// grunt startコマンドを打つと走るタスクです。初期構築を行います。
 	grunt.registerTask('start', ['copy','rename','clean:prepare']);
 	// grunt watch_filesコマンドを打つと走るタスクです。ファイルの監視・livereloadを行います。
-	grunt.registerTask('watch_files', ['open','livereloadx','esteWatch']);
+	grunt.registerTask('watch_files', ['connect','esteWatch']);
 	// grunt lintコマンドを打つと走るタスクです。css/jsにlint/hintを走らせます。
 	grunt.registerTask('lint', ['csslint','jshint']);
 	// grunt checkコマンドを打つと走るタスクです。css/jsをチェックします。
