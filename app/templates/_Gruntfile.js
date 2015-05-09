@@ -207,7 +207,7 @@ module.exports = function(grunt) {
 				}
 			},
 			coffee: function(filepath) {
-				return ['browserify','concat:script','uglify'];
+				return ['browserify:dist','concat:script','uglify'];
 			},
 			scss: function(filepath) {
 				return ['sass','autoprefixer:no_dest','concat:style','cssmin'];
