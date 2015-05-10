@@ -203,7 +203,9 @@ module.exports = function(grunt) {
 					'<%%= path.root %>/<%%= path.compile %>/jade/**/'
 				],
 				livereload: {
-					enabled: false
+					enabled: true,
+					extensions: ['coffee', 'scss', 'jade', 'jpg', 'png', 'gif'],
+					port: 35729
 				}
 			},
 			coffee: function(filepath) {
@@ -272,7 +274,7 @@ module.exports = function(grunt) {
 				options: {
 					base: '.',
 					livereload: true,
-					open: 'http://localhost:8000/',
+					open: 'http://0.0.0.0:8000/',
 					hostname: '0.0.0.0',
 					port: 8000,
 					middleware: function(connect, options) {
