@@ -204,7 +204,7 @@ module.exports = function(grunt) {
 				],
 				livereload: {
 					enabled: true,
-					extensions: ['coffee', 'scss', 'jade', 'jpg', 'png', 'gif'],
+					extensions: ['coffee', 'scss', 'jade', 'jpg', 'png', 'gif', 'frag', 'vert'],
 					port: 35729
 				}
 			},
