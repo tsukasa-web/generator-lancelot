@@ -3,6 +3,8 @@
 	"dependencies": {
 		<% if (fontawesome) { %> "font-awesome": "latest",<% } %>
 		"modernizr": "latest",
-		"normalize-css": "latest"
+		"normalize-css": "latest",
+		//"twgl.js": "latest",
+		"greensock": "latest"
 	}
 }

@@ -228,7 +228,7 @@ module.exports = function(grunt) {
 					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/run.coffee']
 				},
 				options: {
-					transform: ['coffeeify'],
+					transform: ['coffeeify','debowerify'],
 					external: ['jquery','underscore'/*,'hoge'*/],
 					browserifyOptions: {
 						extensions: ['.coffee']
@@ -322,7 +322,9 @@ module.exports = function(grunt) {
 				src: [
 					'assets',
 					'node_modules/generator-giraffe',
-					'bower_components',
+					'bower_components/modernizr',
+					'bower_components/normalize-css',
+					'bower_components/font-awesome',
 					'.bowerrc',
 					'.editorconfig',
 					'.jshintrc',
