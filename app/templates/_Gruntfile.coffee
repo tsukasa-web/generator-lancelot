@@ -196,7 +196,7 @@ module.exports = (grunt) ->
 					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/run.coffee']
 				options:
 					transform: ['coffeeify', 'debowerify', 'jadeify']
-					external: ['jquery', 'underscore', 'greensock'###, 'twgl.js'###]
+					external: ['jquery', 'underscore']
 					browserifyOptions:
 						extensions: ['.coffee']
 			lib:
@@ -204,7 +204,7 @@ module.exports = (grunt) ->
 					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/lib.coffee']
 				options:
 					transform: ['coffeeify', 'debowerify', 'jadeify']
-					require: ['jquery', 'underscore', 'greensock'###, 'twgl.js'###]
+					require: ['jquery', 'underscore']
 					browserifyOptions:
 						extensions: ['.coffee']
 
