@@ -20,6 +20,7 @@ A generator for [Yeoman](http://yeoman.io).
 * mixinライブラリ（bourbon）を搭載
 * 最新normalize/modernizr/font-awesomeの取得
 * spritesmithによるsprite作成
+* svgstoreによるsprite作成
 * grunt-kssによるスタイルガイド生成
 * 各種mixinなどのscssライブラリを追加
 * Jadeに対応
@@ -60,9 +61,7 @@ generator-lancelotをインストールします。
 yeomanからの質問形式で以下の設定を行います。
 
 - 開発者名（packageのauthorに入ります）
-- localhost（プロジェクト名）
 - ルートディレクトリ名
-- Jadeを使用するかどうか
 - FontAwesomeを使用するかどうか
 - 共通リソースディレクトリ名
 - コンパイル言語ファイルの格納先
@@ -90,10 +89,10 @@ Gruntfile.jsを開き、結合したいcss,jsのパスを通します。
 
 #### ファイル監視の起動
 
-```grunt watch_files```コマンドでGrunt.jsで設定したlocalhost名でページが開き、ファイルの監視が始まります。
+```grunt watch_files```コマンドでGrunt.jsで設定したページが開き、ファイルの監視が始まります。
 Sublime Text2でlivereloadのプラグインを入れてる人は、バッティングするのでプラグインをremoveしてから使ってください。  
 この後、コンソールは出したままにしておいてください。最小化しても大丈夫です。  
-以降はscss/coffee/js(Sassのみの時)が更新される度に自動的にコンパイル・結合・圧縮・デバッグが行われます。  
+以降はscss/coffee(Sassのみの時)が更新される度に自動的にコンパイル・結合・圧縮・デバッグが行われます。
 さらに、htmlとcss(sassを使っている人はscss更新時)の更新時に自動でブラウザがリロードされます。  
 コンソールは消さずに出したままにしておいてください。監視をやめたい場合はコンソール上でCtrl+Cを押してください。　　
 任意のタイミングでコンパイル・結合・圧縮・デバッグを行いたい場合は```grunt```コマンドを打ち込んでください。
@@ -146,7 +145,9 @@ https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkigh
 
 #### スプライトシートの作成
 
-Compassで毎回書き出すと遅くなるので、Compassのスプライトシート生成はgrunt-spritesmithで代用しています。```grunt sprite```を叩くとスプライトシートの生成が始まります。初期設定では/common/img/sprite内のpng画像が結合され、/common/img/にsprite.pngとして書き出されます。また、スタイルの設定ファイルは/common/compile/scss/lib/_sprite.scssに上書きされます。
+Compassで毎回書き出すと遅くなるので、Compassのスプライトシート生成はgrunt-spritesmithで代用しています。```grunt spriteImage```を叩くとスプライトシートの生成が始まります。初期設定では/common/img/sprite内のpng画像が結合され、/common/img/にsprite.pngとして書き出されます。また、スタイルの設定ファイルは/common/compile/scss/lib/_sprite.scssに上書きされます。
+
+同様に```grunt spriteSVG```を叩くとSVGスプライトシートの生成が始まります。
 
 ## License
 

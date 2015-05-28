@@ -107,7 +107,7 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 		this.copy('scss/_module.scss', this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss' + '/_module.scss');
 		this.copy('scss/style.scss', this.rootDirectory + '/' + this.common + '/' + this.compile + '/scss' + '/style.scss');
 
-		this.template('_Gruntfile.js','Gruntfile.js');
+		this.template('_Gruntfile.coffee','Gruntfile.coffee');
 		this.template('_package.json','package.json');
 		this.template('_bower.json','bower.json');
 		this.template('bowerrc','.bowerrc');
