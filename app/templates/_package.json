@@ -35,6 +35,7 @@
 		"debowerify": "~1.2.1",
 	  	"jadeify": "~4.3.0",
 		"jquery": "~2.1.1",
-		"underscore": "~1.7.0"
+		"underscore": "~1.7.0",
+		"gsap": "~1.17.0"
 	}
 }
