@@ -22,7 +22,6 @@
 		"grunt-kss": "~2.0.0",
 		"grunt-autoprefixer": "~3.0.0",
 		"grunt-spritesmith": "~4.6.0",
-		"grunt-csscss": "~0.6.2",
 		"grunt-este-watch": "~0.1.18",
 		"grunt-sass": "~1.0.0",
 		"grunt-parallelize": "~1.1.0",

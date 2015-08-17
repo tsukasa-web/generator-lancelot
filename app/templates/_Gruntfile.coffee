@@ -132,15 +132,6 @@ module.exports = (grunt) ->
 			no_dest:
 				src: '<%%= path.dest %>/<%%= path.src %>/css/style.css'
 
-		### csscssによるcssチェック。結果はコンソールに表示
-		------------------------------------------------------------------------###
-		csscss:
-			options:
-				compass: true
-				ignoreSassMixins: true
-			dist:
-				src: ['<%%= path.dest %>/<%%= path.src %>/css/style.css']
-
 		### csslintによるcssチェック。結果はコンソールに表示
 		------------------------------------------------------------------------###
 		csslint:
@@ -331,8 +322,6 @@ module.exports = (grunt) ->
 	grunt.registerTask 'release', ['clean:build','sass','jade','browserify:lib','modernizr','browserify:dist','autoprefixer','concat','uglify','cssmin','copy:common','copy:icons']
 	# grunt cssコマンドを打つと走るタスクです。browserifyによってlib.jsを出力します。
 	grunt.registerTask 'makelib',['browserify:lib','modernizr']
-	# grunt cssコマンドを打つと走るタスクです。csscssによってスタイルの重複を出力します。
-	grunt.registerTask 'csscss', ['csscss']
 	# grunt spriteコマンドを打つと走るタスクです。スプライト画像とスタイルを出力します。
 	grunt.registerTask 'spriteImage', ['sprite:all','sass']
 	# grunt spriteコマンドを打つと走るタスクです。スプライトSVGとスタイルを出力し、SVGを圧縮します。
@@ -342,7 +331,7 @@ module.exports = (grunt) ->
 	# grunt watch_filesコマンドを打つと走るタスクです。ファイルの監視・livereloadを行います。
 	grunt.registerTask 'watch_files', ['connect','esteWatch']
 	# grunt checkコマンドを打つと走るタスクです。css/jsをチェックします。
-	grunt.registerTask 'check', ['csscss','csslint','jshint']
+	grunt.registerTask 'check', ['csslint','jshint']
 	# grunt styleコマンドを打つと走るタスクです。styleguideを作成します。
 	grunt.registerTask 'style', ['kss']
 
