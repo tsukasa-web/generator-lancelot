@@ -6,6 +6,7 @@ module.exports = (grunt) ->
 	# パスの設定
 	pathConfig = 
 		root: '<%= rootDirectory %>' #project root
+		dest: '<%= buildDirectory %>' #build root
 		src: '<%= common %>' #共通リソースの配置先
 		compile: '<%= common %>/<%= compile %>' #コンパイル言語ソース類の配置先
 		documents: '<%= _documents %>'
@@ -25,7 +26,7 @@ module.exports = (grunt) ->
 				includePaths: require('node-bourbon').includePaths
 			dist:
 				files:
-					'<%%= path.root %>/<%%= path.src %>/css/dest/style.css': '<%%= path.root %>/<%%= path.compile %>/scss/style.scss'
+					'<%%= path.dest %>/<%%= path.src %>/css/style.css': '<%%= path.root %>/<%%= path.compile %>/scss/style.scss'
 
 		### Image SpriteSheetの作成
 		------------------------------------------------------------------------###
@@ -33,10 +34,10 @@ module.exports = (grunt) ->
 			all:
 				src: '<%%= path.root %>/<%%= path.src %>/img/sprite/*.png'
 				destCSS: '<%%= path.root %>/<%%= path.compile %>/scss/lib/_sprite.scss'
-				destImg: '<%%= path.root %>/<%%= path.src %>/img/sprite.png'
+				destImg: '<%%= path.dest %>/<%%= path.src %>/img/sprite.png'
 				padding: 2
 				algorithm: 'binary-tree'
-				imgPath: '/<%%= path.src %>/img/sprite.png'
+				imgPath: '<%%= path.dest %>/<%%= path.src %>/img/sprite.png'
 
 		### SVG SpriteSheetの作成
   	------------------------------------------------------------------------###
@@ -57,7 +58,7 @@ module.exports = (grunt) ->
 				preserveDescElement: false
 			dev:
 				files:
-					'<%%= path.root %>/<%%= path.src %>/img/sprite.svg': [
+					'<%%= path.dest %>/<%%= path.src %>/img/sprite.svg': [
 						'<%%= path.root %>/<%%= path.src %>/img/sprite/*.svg',
 						'!<%%= path.root %>/<%%= path.src %>/img/sprite/_*.svg'
 					]
@@ -77,7 +78,7 @@ module.exports = (grunt) ->
 				]
 			dev:
 				files:
-					'<%%= path.root %>/<%%= path.src %>/img/sprite.svg': '<%%= path.root %>/<%%= path.src %>/img/sprite.svg'
+					'<%%= path.dest %>/<%%= path.src %>/img/sprite.svg': '<%%= path.root %>/<%%= path.src %>/img/sprite.svg'
 
 		### Jadeのコンパイル
 		------------------------------------------------------------------------###
@@ -90,7 +91,7 @@ module.exports = (grunt) ->
 					expand: true
 					cwd: '<%%= path.root %>/<%%= path.compile %>/jade/'
 					src: ['**/*.jade', '!_parts/*.jade', '!_templates/*.jade']
-					dest: '<%%= path.root %>'
+					dest: '<%%= path.dest %>'
 					ext: '.html'
 				}]
 
@@ -99,32 +100,28 @@ module.exports = (grunt) ->
 		concat:
 			script:
 				src: [
-					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js',
-					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js'
+					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js'
 				]
-				dest: '<%%= path.root %>/<%%= path.src %>/js/all.js'
-			style:
-				src: [
-					'<%%= path.root %>/<%%= path.src %>/lib/normalize.css',
-					'<%%= path.root %>/<%%= path.src %>/css/dest/style.css'
-				]
-				dest: '<%%= path.root %>/<%%= path.src %>/css/style-all.css'
+				dest: '<%%= path.dest %>/<%%= path.src %>/js/lib.js'
 
 		### jsファイルの圧縮（ライセンス表記のコメントはコメント内容の先頭に@licenseを必ず表記してください！
 		------------------------------------------------------------------------###
 		uglify:
 			options:
 				preserveComments: "some"
+			lib:
+				src: ['<%%= path.dest %>/<%%= path.src %>/js/lib.js'],
+				dest: '<%%= path.dest %>/<%%= path.src %>/js/lib.js'
 			run:
-				src: ['<%%= path.root %>/<%%= path.src %>/js/all.js'],
-				dest: '<%%= path.root %>/<%%= path.src %>/js/all.min.js'
+				src: ['<%%= path.dest %>/<%%= path.src %>/js/run.js'],
+				dest: '<%%= path.dest %>/<%%= path.src %>/js/run.js'
 
 		### cssファイルの圧縮
 		------------------------------------------------------------------------###
 		cssmin:
 			style:
-				src: ['<%%= path.root %>/<%%= path.src %>/css/style-all.css'],
-				dest: '<%%= path.root %>/<%%= path.src %>/css/style-all.min.css'
+				src: ['<%%= path.dest %>/<%%= path.src %>/css/style.css'],
+				dest: '<%%= path.dest %>/<%%= path.src %>/css/style.css'
 
 		### cssファイルの不要prefix消去
 		------------------------------------------------------------------------###
@@ -133,7 +130,7 @@ module.exports = (grunt) ->
 				# ブラウザのバージョン指定
 				browsers: ['last 2 version']
 			no_dest:
-				src: '<%%= path.root %>/<%%= path.src %>/css/dest/*.css'
+				src: '<%%= path.dest %>/<%%= path.src %>/css/style.css'
 
 		### csscssによるcssチェック。結果はコンソールに表示
 		------------------------------------------------------------------------###
@@ -142,26 +139,26 @@ module.exports = (grunt) ->
 				compass: true
 				ignoreSassMixins: true
 			dist:
-				src: ['<%%= path.root %>/<%%= path.src %>/css/dest/*.css']
+				src: ['<%%= path.dest %>/<%%= path.src %>/css/style.css']
 
 		### csslintによるcssチェック。結果はコンソールに表示
 		------------------------------------------------------------------------###
 		csslint:
 			dist:
-				src: ['<%%= path.root %>/<%%= path.src %>/css/dest/*.css']
+				src: ['<%%= path.dest %>/<%%= path.src %>/css/style.css']
 
 		### jsHintによるjsデバッグ。結果はコンソールに表示
 		------------------------------------------------------------------------###
 		jshint:
 		# 対象ファイルを指定
-			all: ['<%%= path.root %>/<%%= path.src %>/js/dest/*.js']
+			all: ['<%%= path.dest %>/<%%= path.src %>/js/run.js']
 
 		### styleguideの作成
 		------------------------------------------------------------------------###
 		kss:
 			options:
 				includeType: 'css'
-				includePath: '<%%= path.root %>/<%%= path.src %>/css/style-all.min.css'
+				includePath: '<%%= path.dest %>/<%%= path.src %>/css/style.css'
 				template: '<%%= path.root %>/<%%= path.documents %>/styleguide_temp'
 			dist:
 				files:
@@ -172,28 +169,29 @@ module.exports = (grunt) ->
 		esteWatch:
 			options:
 				dirs: [
-					'<%%= path.root %>/<%%= path.compile %>/scss/**/',
-					'<%%= path.root %>/<%%= path.compile %>/coffee/**/',
-					'<%%= path.root %>/<%%= path.compile %>/ts/**/',
-					'<%%= path.root %>/<%%= path.compile %>/jade/**/'
+					'<%%= path.root %>/**/',
+					'<%%= path.root %>/<%%= path.src %>/img/sprite/**/'
 				]
 				livereload:
 					enabled: true
 					extensions: ['coffee', 'scss', 'jade', 'jpg', 'png', 'gif', 'frag', 'vert']
 					port: 35729
 			coffee: (filepath) ->
-				return ['browserify:dist', 'concat:script', 'uglify']
+				return ['browserify:dist', 'concat:script']
 			scss: (filepath) ->
-				return ['sass', 'autoprefixer:no_dest', 'concat:style', 'cssmin']
+				return ['sass', 'autoprefixer:no_dest']
 			jade: (filepath) ->
-				return ['jade']
+				return ['newer:jade']
+			'*': (filepath) ->
+				if filepath.indexOf('coffee') == -1 && filepath.indexOf('scss') == -1 && filepath.indexOf('jade') == -1
+					return ['newer:copy']
 
 		### browserifyによるモジュール管理
 		------------------------------------------------------------------------###
 		browserify:
 			dist:
 				files:
-					'<%%= path.root %>/<%%= path.src %>/js/dest/run.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/run.coffee']
+					'<%%= path.dest %>/<%%= path.src %>/js/run.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/run.coffee']
 				options:
 					transform: ['coffeeify', 'debowerify', 'jadeify']
 					external: ['jquery', 'underscore']
@@ -201,12 +199,39 @@ module.exports = (grunt) ->
 						extensions: ['.coffee']
 			lib:
 				files:
-					'<%%= path.root %>/<%%= path.src %>/js/dest/lib.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/lib.coffee']
+					'<%%= path.dest %>/<%%= path.src %>/js/lib.js': ['<%%= path.root %>/<%%= path.compile %>/coffee/lib.coffee']
 				options:
 					transform: ['coffeeify', 'debowerify', 'jadeify']
 					require: ['jquery', 'underscore']
 					browserifyOptions:
 						extensions: ['.coffee']
+
+		### Modernizr
+  	------------------------------------------------------------------------###
+		modernizr:
+			dist:
+				devFile : 'remote'
+				#Path to save out the built file.
+				outputFile : '<%%= path.dest %>/<%%= path.src %>/js/modernizr-custom.js'
+				uglify : true
+				parseFiles : false
+				matchCommunityTests : true
+				extra:
+					shiv: true
+					printshiv: false
+					load: true
+					mq: false
+					cssclasses: true
+				extensibility:
+					addtest: true
+					prefixed: true
+					teststyles: true
+					testprops: true
+					testallprops: true
+					hasevents: true
+					prefixes: true
+					domprefixes: true
+				tests: ['video','webgl','webgl_extensions','touch','inlinesvg','cssanimations','csstransitions']
 
 		### Jasmine
 		------------------------------------------------------------------------###
@@ -232,7 +257,7 @@ module.exports = (grunt) ->
 					hostname: '0.0.0.0'
 					port: 8000
 					middleware: (connect, options) ->
-						return [folderMount(connect, 'docs')] #ここでルートにしたいフォルダを指定
+						return [folderMount(connect, '<%%= path.dest %>')] #ここでルートにしたいフォルダを指定
 
 		### データ複製
 		------------------------------------------------------------------------###
@@ -244,6 +269,28 @@ module.exports = (grunt) ->
 					{expand: true, cwd: 'bower_components/font-awesome/fonts', src: ['**'], dest: '<%= rootDirectory %>/<%%= path.src %>/fonts'},
 					{expand: true, cwd: 'bower_components/font-awesome/scss', src: ['**'], dest: '<%= rootDirectory %>/<%%= path.compile %>/scss/font-awesome'}
 				]
+			media:
+				expand: true
+				cwd: '<%%= path.root %>'
+				src: [
+					'icons/**/*.{png,jpg,jpeg,gif,svg,svgz,xml,json,ico}'
+					'media/**/*.{png,jpg,jpeg,gif,svg,svgz,mp4,m4v,webm,ogg,ogm}'
+				]
+				dest: '<%%= path.dest %>'
+			common:
+				expand: true
+				cwd: '<%%= path.root %>/<%%= path.src %>'
+				src: [
+					'fonts/**/*'
+					'img/**/*.{png,jpg,jpeg,gif,svg,svgz,mp4,m4v,webm,ogg,ogm}'
+					'!img/sprite/**/*'
+				]
+				dest: '<%%= path.dest %>/<%%= path.src %>'
+			parallelize:
+				copy:
+					media: 4
+					common: 4
+					parallelize: 4
 
 		### ファイルリネーム
 		------------------------------------------------------------------------###
@@ -271,24 +318,19 @@ module.exports = (grunt) ->
 					'.yo-rc.json',
 					'bower.json'
 				]
-
-		### タスクの並列処理
-		------------------------------------------------------------------------###
-		parallelize:
-			typescript:
-				base: 4
-			coffee:
-				compile: 4
-				compileAll: 4
-			compass:
-				dist: 4
-			sprite:
-				all: 4
+			build:
+				options:
+					force: true # 強制的に上位ディレクトリを削除
+				src: [
+					'_build'
+				]
 
 	# gruntコマンドを打つと走るタスクです。
-	grunt.registerTask 'default', ['sass','jade','csscss','browserify:lib','browserify:dist','autoprefixer','concat','uglify','cssmin']
+	grunt.registerTask 'default', ['clean:build','sass','jade','browserify:lib','modernizr','browserify:dist','autoprefixer','concat','copy:media','copy:common','connect','esteWatch']
+	# grunt releaseコマンドを打つと走るタスクです。
+	grunt.registerTask 'release', ['clean:build','sass','jade','browserify:lib','modernizr','browserify:dist','autoprefixer','concat','uglify','cssmin','copy:common','copy:icons']
 	# grunt cssコマンドを打つと走るタスクです。browserifyによってlib.jsを出力します。
-	grunt.registerTask 'makelib',['browserify:lib']
+	grunt.registerTask 'makelib',['browserify:lib','modernizr']
 	# grunt cssコマンドを打つと走るタスクです。csscssによってスタイルの重複を出力します。
 	grunt.registerTask 'csscss', ['csscss']
 	# grunt spriteコマンドを打つと走るタスクです。スプライト画像とスタイルを出力します。
@@ -296,11 +338,9 @@ module.exports = (grunt) ->
 	# grunt spriteコマンドを打つと走るタスクです。スプライトSVGとスタイルを出力し、SVGを圧縮します。
 	grunt.registerTask 'spriteSVG', ['svgstore','svgmin','jade']
 	# grunt startコマンドを打つと走るタスクです。初期構築を行います。
-	grunt.registerTask 'start', ['copy','rename','clean:prepare']
+	grunt.registerTask 'start', ['copy:setup','rename','clean:prepare']
 	# grunt watch_filesコマンドを打つと走るタスクです。ファイルの監視・livereloadを行います。
 	grunt.registerTask 'watch_files', ['connect','esteWatch']
-	# grunt lintコマンドを打つと走るタスクです。css/jsにlint/hintを走らせます。
-	grunt.registerTask 'lint', ['csslint','jshint']
 	# grunt checkコマンドを打つと走るタスクです。css/jsをチェックします。
 	grunt.registerTask 'check', ['csscss','csslint','jshint']
 	# grunt styleコマンドを打つと走るタスクです。styleguideを作成します。

@@ -35,6 +35,11 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 				default: 'docs'
 			},
 			{
+				name: 'buildDirectory',
+				message: 'Input buildDirectory name default(_build)',
+				default: '_build'
+			},
+			{
 				type: 'confirm',
 				name: 'fontawesome',
 				message: 'Do you use font-awesome? default(Yes)',
@@ -60,6 +65,7 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 		this.prompt(prompts, function (props) {
 			this.user_name = props.user_name;
 			this.rootDirectory = props.rootDirectory;
+			this.buildDirectory = props.buildDirectory;
 			this.fontawesome = props.fontawesome;
 			this.sprite = props.sprite;
 			this.jqueryversion = props.jqueryversion;
@@ -72,6 +78,9 @@ var LancelotGenerator = yeoman.generators.Base.extend({
 
 	app : function () {
 		this.mkdir(this.rootDirectory);
+		this.mkdir(this.buildDirectory);
+		this.mkdir(this.rootDirectory + '/media');
+		this.mkdir(this.rootDirectory + '/icon');
 		this.mkdir(this.rootDirectory + '/' + this.common);
 		this.mkdir(this.rootDirectory + '/' + this.common + '/css');
 		this.mkdir(this.rootDirectory + '/' + this.common + '/js');
