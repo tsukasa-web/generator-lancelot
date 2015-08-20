@@ -31,3 +31,7 @@ select, button, input, textarea {
 	width: 100%;
 	-webkit-appearance: none;
 }
+
+svg{
+	pointer-events: none;
+}
