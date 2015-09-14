@@ -1,6 +1,6 @@
 {
 	"name": "generator-lancelot",
-	"version": "0.1.11",
+	"version": "0.1.12",
 	"description": "A generator for IC",
 	"licenses": "MIT",
 	"homepage": "https://github.com/tsukasa-web/generator-lancelot",
@@ -13,8 +13,8 @@
 		"url": "https://github.com/tsukasa-web"
 	},
 	"engines": {
-		"node": ">=0.12.2",
-		"npm": ">=1.2.10"
+		"node": ">=4.0.0",
+		"npm": ">=2.14.2"
 	},
 	"scripts": {
 		"test": "mocha"
