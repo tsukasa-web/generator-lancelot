@@ -10,8 +10,6 @@ module.exports = (grunt) ->
 		src: '<%= common %>' #共通リソースの配置先
 		compile: '<%= common %>/<%= compile %>' #コンパイル言語ソース類の配置先
 		documents: '<%= _documents %>'
-	folderMount = (connect, dir) ->
-		return connect.static path.resolve(dir)
 
 	grunt.initConfig
 
@@ -242,13 +240,11 @@ module.exports = (grunt) ->
 		connect:
 			server:
 				options:
-					base: '.'
+					base: './<%%= path.dest %>'
 					livereload: true
 					open: 'http://0.0.0.0:8000/'
 					hostname: '0.0.0.0'
 					port: 8000
-					middleware: (connect, options) ->
-						return [folderMount(connect, '<%%= path.dest %>')] #ここでルートにしたいフォルダを指定
 
 		### データ複製
 		------------------------------------------------------------------------###
