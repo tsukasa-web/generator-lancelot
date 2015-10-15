@@ -279,11 +279,14 @@ module.exports = (grunt) ->
 					'!img/sprite/**/*'
 				]
 				dest: '<%%= path.dest %>/<%%= path.src %>'
-			parallelize:
-				copy:
-					media: 4
-					common: 4
-					parallelize: 4
+
+		### 並列処理
+		------------------------------------------------------------------------###
+		parallelize:
+			copy:
+				media: 4
+				common: 4
+				parallelize: 4
 
 		### ファイルリネーム
 		------------------------------------------------------------------------###
